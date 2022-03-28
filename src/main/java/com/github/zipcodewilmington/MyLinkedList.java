@@ -1,9 +1,32 @@
 package com.github.zipcodewilmington;
 
-public class MyLinkedList<T> {
+import java.util.Iterator;
+
+public class MyLinkedList<T> implements Iterable{
     private LinkedListNode<T> head;
     private LinkedListNode<T> tail;
     private long listSize;
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            LinkedListNode<T> current = head;
+            @Override
+            public boolean hasNext() {
+                return current!=null;
+            }
+
+            @Override
+            public T next() {
+                if (hasNext()) {
+                    T data = current.getData();
+                    current = current.getNext();
+                    return data;
+                }
+                return null;
+            }
+        };
+    }
 
     public static class LinkedListNode<T> {
         T currentData;

@@ -27,7 +27,7 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
     @Override
     public void set(K key, V value) {
         //need to consider size issue, resize method needed and need to check for size
-        int index = ((int) hashingAlg.HashFunction(key)) % myMap.length;
+        int index = (hashingAlg.HashFunction(key)) % myMap.length;
         if (myMap[index] == null){
 //            myMap[index] = new MyLinkedList<>();
             myMap[index] = new LinkedList<>();
@@ -48,7 +48,7 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
 
     @Override
     public boolean delete(K key) {
-        int index = ((int) hashingAlg.HashFunction(key)) % myMap.length;
+        int index = (hashingAlg.HashFunction(key)) % myMap.length;
         if (myMap[index]==null)
             return false;
         myEntry<K,V> entryToRemove = null;
@@ -65,8 +65,8 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
     }
 
     @Override
-    public V get(String key) {
-        int index = ((int) hashingAlg.HashFunction(key)) % myMap.length;
+    public V get(K key) {
+        int index = (hashingAlg.HashFunction(key)) % myMap.length;
         if (myMap[index] == null)
             return null;
         for (myEntry<K,V> entry : myMap[index]){
@@ -79,8 +79,8 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
     @Override
     public boolean isEmpty() {
         if (size>0)
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     @Override

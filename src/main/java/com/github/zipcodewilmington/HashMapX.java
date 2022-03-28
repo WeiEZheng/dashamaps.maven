@@ -9,11 +9,10 @@ public interface HashMapX<K, V> {
     // fundamentals
 //    void set(String key, String value);
 //    String delete(String key);
-
     void set(K key, V value);
     boolean delete(K key);
 //    String get(String key);
-    V get(String key);
+    V get(K key);
     boolean isEmpty();
     long size();
 
