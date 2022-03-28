@@ -1,10 +1,10 @@
 package com.github.zipcodewilmington;
 
-public class myEntry<K, V> {
+public class MyEntry<K, V> {
     private K key;
     private V value;
 
-    public myEntry(K key, V value) {
+    public MyEntry(K key, V value) {
         this.key=key;
         this.value=value;
     }

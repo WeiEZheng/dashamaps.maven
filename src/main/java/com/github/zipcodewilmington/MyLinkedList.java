@@ -2,7 +2,7 @@ package com.github.zipcodewilmington;
 
 import java.util.Iterator;
 
-public class MyLinkedList<T> implements Iterable{
+public class MyLinkedList<T> implements Iterable<T> {
     private LinkedListNode<T> head;
     private LinkedListNode<T> tail;
     private long listSize;
@@ -11,9 +11,10 @@ public class MyLinkedList<T> implements Iterable{
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             LinkedListNode<T> current = head;
+
             @Override
             public boolean hasNext() {
-                return current!=null;
+                return current != null;
             }
 
             @Override
@@ -32,25 +33,25 @@ public class MyLinkedList<T> implements Iterable{
         T currentData;
         LinkedListNode<T> nextData;
 
-        LinkedListNode(T currentData){
+        LinkedListNode(T currentData) {
             this.currentData = currentData;
             this.nextData = null;
         }
 
-        void setNext(LinkedListNode<T> next){
+        void setNext(LinkedListNode<T> next) {
             nextData = next;
         }
 
-        LinkedListNode<T> getNext(){
+        LinkedListNode<T> getNext() {
             return nextData;
         }
 
-        T getData(){
+        T getData() {
             return currentData;
         }
 
-        void setCurrentData(T data){
-            currentData=data;
+        void setCurrentData(T data) {
+            currentData = data;
         }
     }
 
@@ -65,51 +66,19 @@ public class MyLinkedList<T> implements Iterable{
         listSize++;
     }
 
-    public void remove(int index){
-        int count=0;
-        if (index>listSize)
-            return;
-        if (index==0) {
-            head = head.getNext();
-            listSize--;
-        }
-        else {
-            LinkedListNode<T> current = head;
-            LinkedListNode<T> previous = null;
-            while (count != index) {
-                previous = current;
-                current = current.getNext();
-                count++;
-            }
-            previous.setNext(current.getNext());
-            listSize--;
-        }
-    }
-
-    public int find(T element){
+    public void remove(T value) {
         LinkedListNode<T> current = head;
-        int index = 0;
-        while (current != null){
-            if (current.getData().equals(element)){
-                return index;
-            }
+        LinkedListNode<T> previous = null;
+        while (current.getNext() != null) {
+            if (current.getData() == value)
+                break;
+            previous = current;
             current = current.getNext();
-            index++;
         }
-        return -1;
-    }
-
-    public T get(int index){
-        int count=0;
-        LinkedListNode<T> current = head;
-        while (count!=index){
-            current=current.getNext();
-            count++;
-        }
-        return current.getData();
-    }
-
-    public long size() {
-        return listSize;
+        if (previous != null)
+            previous.setNext(current.getNext());
+        else
+            head = null;
+        listSize--;
     }
 }
