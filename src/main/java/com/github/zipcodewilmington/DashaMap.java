@@ -34,7 +34,6 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
             for (MyEntry entry : myMap[index]) {
                 if (entry.getKey().equals(key)){
                     entry.setValue(value);
-                    size++;
                     return;
                 }
             }

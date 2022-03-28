@@ -21,12 +21,22 @@ public class DashaMapTest {
         Assertions.assertEquals(1, dashaMap.size());
     }
     @Test
+    void setGetTest1multiple(){
+        DashaMap<String, String> dashaMap = new DashaMap(new HashingOne());
+        dashaMap.set("Fiber", "Look");
+        dashaMap.set("Fiber", "Look1");
+        String actual = dashaMap.get("Fiber");
+        Assertions.assertEquals("Look1", actual);
+        Assertions.assertEquals(1, dashaMap.size());
+    }
+    @Test
     void setGetTest2(){
         DashaMap<String, String> dashaMap = new DashaMap(new HashingTwo());
         dashaMap.set("Fiber", "Look");
+        dashaMap.set("Fiber1", "Look");
         String actual = dashaMap.get("Fiber");
         Assertions.assertEquals("Look", actual);
-        Assertions.assertEquals(1, dashaMap.size());
+        Assertions.assertEquals(2, dashaMap.size());
     }
     @Test
     void setGetTest3(){
