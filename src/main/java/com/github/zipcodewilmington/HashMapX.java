@@ -5,11 +5,15 @@ package com.github.zipcodewilmington;
  * @version 1.0.0
  * @date 10/21/19 9:05 AM
  */
-public interface HashMapX {
+public interface HashMapX<K, V> {
     // fundamentals
-    void set(String key, String value);
-    String delete(String key);
-    String get(String key);
+//    void set(String key, String value);
+//    String delete(String key);
+
+    void set(K key, V value);
+    boolean delete(K key);
+//    String get(String key);
+    V get(String key);
     boolean isEmpty();
     long size();
 
