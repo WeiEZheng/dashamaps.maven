@@ -10,7 +10,7 @@ import com.github.zipcodewilmington.Hash.HashingDefault;
  * @date 10/21/19 9:05 AM
  */
 public class DashaMap<K, V> implements HashMapX<K, V>{
-    private MyLinkedList<MyEntry>[] myMap = new MyLinkedList[1000];
+    private MyLinkedList<MyEntry>[] myMap = new MyLinkedList[10];
     private long size;
     private HashingAlg hashingAlg;
 
@@ -24,7 +24,8 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
 
     @Override
     public void set(K key, V value) {
-        //need to consider size issue, resize method needed and need to check for size
+        if (size>= myMap.length)
+            resize();
         int index = (hashingAlg.HashFunction(key)) % myMap.length;
         if (myMap[index] == null){
             myMap[index] = new MyLinkedList<>();
@@ -87,5 +88,18 @@ public class DashaMap<K, V> implements HashMapX<K, V>{
     @Override
     public boolean bucketSize(String key) {
         return false;
+    }
+
+    public void resize() {
+        MyLinkedList<MyEntry>[] oldMap = myMap;
+        myMap = new MyLinkedList[(int)size+10];
+        size=0;
+        for (int i=0; i<oldMap.length;i++) {
+            if (oldMap[i]==null)
+                continue;
+            for (MyEntry<K, V> entry : oldMap[i]) {
+                set(entry.getKey(), entry.getValue());
+            }
+        }
     }
 }

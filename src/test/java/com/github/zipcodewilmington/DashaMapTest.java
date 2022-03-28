@@ -49,12 +49,48 @@ public class DashaMapTest {
     }
     @Test
     void setRemoveTest(){
-        DashaMap<String, String> dashaMap = new DashaMap(new HashingOne());
+        DashaMap<String, String> dashaMap = new DashaMap();
         dashaMap.set("Fiber", "Look");
         dashaMap.delete("Fiber");
         String actual = dashaMap.get("Fiber");
         Assertions.assertNull(null, actual);
         Assertions.assertEquals(0, dashaMap.size());
         Assertions.assertTrue(dashaMap.isEmpty());
+    }
+    @Test
+    void setResizeTest(){
+        DashaMap<String, String> dashaMap = new DashaMap(new HashingOne());
+        dashaMap.set("a", "Look");
+        dashaMap.set("b", "Look");
+        dashaMap.set("c", "Look");
+        dashaMap.set("d", "Look");
+        dashaMap.set("e", "Look");
+        dashaMap.set("f", "Look");
+        dashaMap.set("g", "Look");
+        dashaMap.set("h", "Look");
+        dashaMap.set("i", "Look");
+        dashaMap.set("j", "Look");
+        dashaMap.set("k", "Look");
+        Assertions.assertEquals("Look", dashaMap.get("a"));
+        Assertions.assertEquals("Look", dashaMap.get("b"));
+        Assertions.assertEquals("Look", dashaMap.get("c"));
+        Assertions.assertEquals("Look", dashaMap.get("d"));
+        Assertions.assertEquals("Look", dashaMap.get("e"));
+        Assertions.assertEquals("Look", dashaMap.get("f"));
+        Assertions.assertEquals("Look", dashaMap.get("g"));
+        Assertions.assertEquals("Look", dashaMap.get("h"));
+        Assertions.assertEquals("Look", dashaMap.get("i"));
+        Assertions.assertEquals("Look", dashaMap.get("j"));
+        Assertions.assertEquals("Look", dashaMap.get("k"));
+        Assertions.assertEquals(11, dashaMap.size());
+    }
+
+    @Test
+    void setGetTestInteger(){
+        DashaMap<Integer, String> dashaMap = new DashaMap();
+        dashaMap.set(1, "Look");
+        String actual = dashaMap.get(1);
+        Assertions.assertEquals("Look", actual);
+        Assertions.assertEquals(1, dashaMap.size());
     }
 }
